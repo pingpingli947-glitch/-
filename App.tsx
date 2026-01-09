@@ -166,7 +166,7 @@ const App: React.FC = () => {
                 {searchQuery 
                   ? `"${searchQuery}" 的搜索结果` 
                   : selectedScenario === 'all' 
-                    ? '知识库概览' 
+                    ? '系统操作视频预览' 
                     : selectedScenario}
               </h1>
             </div>

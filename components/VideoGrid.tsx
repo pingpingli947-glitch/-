@@ -26,6 +26,7 @@ const VideoGrid: React.FC<VideoGridProps> = ({ videos, filterState, viewMode, is
         let matchesAudience = true;
         if (filterState.audience === '科室用户' && video.audience === '单位用户') matchesAudience = false;
         if (filterState.audience === '单位用户' && video.audience === '科室用户') matchesAudience = false;
+        if (filterState.audience === '通用' && video.audience !== '通用') matchesAudience = false;
 
         return matchesSearch && matchesAudience;
       }
@@ -35,8 +36,13 @@ const VideoGrid: React.FC<VideoGridProps> = ({ videos, filterState, viewMode, is
 
       // 3. Audience Filter
       let matchesAudience = true;
-      if (filterState.audience === '科室用户' && video.audience === '单位用户') matchesAudience = false;
-      if (filterState.audience === '单位用户' && video.audience === '科室用户') matchesAudience = false;
+      if (filterState.audience === '科室用户') {
+        if (video.audience === '单位用户') matchesAudience = false;
+      } else if (filterState.audience === '单位用户') {
+        if (video.audience === '科室用户') matchesAudience = false;
+      } else if (filterState.audience === '通用') {
+        if (video.audience !== '通用') matchesAudience = false;
+      }
 
       // 4. Status Filter
       let matchesStatus = true;

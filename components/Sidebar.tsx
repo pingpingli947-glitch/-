@@ -117,6 +117,14 @@ const Sidebar: React.FC<SidebarProps> = ({
           >
             单位用户
           </button>
+          <button
+            onClick={() => onSelectAudience('通用')}
+            className={`flex-1 text-xs font-medium py-1.5 rounded-md transition-all ${
+              selectedAudience === '通用' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            通用
+          </button>
         </div>
         {selectedAudience !== 'all' && (
            <button 

@@ -20,12 +20,12 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-20">
       {/* Left: Logo Area */}
-      <div className="flex items-center gap-3 w-64">
-        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
+      <div className="flex items-center gap-3 w-72">
+        <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md flex-shrink-0">
           S
         </div>
         <div>
-           <span className="font-bold text-slate-800 text-lg tracking-tight block leading-none">知识库</span>
+           <span className="font-bold text-slate-800 text-lg tracking-tight block leading-none">系统操作指导知识库</span>
            <span className="text-[10px] text-slate-400 tracking-wider">SystemHelp Hub</span>
         </div>
       </div>
