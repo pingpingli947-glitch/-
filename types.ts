@@ -1,3 +1,4 @@
+
 export type AudienceType = '科室用户' | '单位用户' | '通用';
 
 export type BusinessScenario = 
@@ -6,7 +7,7 @@ export type BusinessScenario =
   | '项目库'
   | '工资发放'
   | '集中支付'
-  | '会计结算';
+  | '会计核算';
 
 export interface VideoItem {
   id: string;
@@ -26,7 +27,8 @@ export interface VideoItem {
 export type ViewMode = 'grid' | 'list';
 export type FilterStatus = 'all' | 'recent' | 'unwatched' | 'favorites';
 
-export type UserRole = 'guest' | 'user' | 'admin';
+// UPDATED: Change to match Database Chinese values directly
+export type UserRole = 'guest' | '管理员' | '科室用户' | '单位用户';
 
 export interface FilterState {
   scenario: BusinessScenario | 'all';

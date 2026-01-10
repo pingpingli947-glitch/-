@@ -12,7 +12,7 @@ const Toast: React.FC<ToastProps> = ({ message, isVisible, onClose }) => {
     if (isVisible) {
       const timer = setTimeout(() => {
         onClose();
-      }, 1500); // 1.5 seconds auto-close
+      }, 3000); // Increased to 3 seconds
       return () => clearTimeout(timer);
     }
   }, [isVisible, onClose]);

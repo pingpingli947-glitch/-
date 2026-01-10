@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Calendar, Eye, FileText, Download, Edit2 } from 'lucide-react';
+import { X, Calendar, Eye, FileText, Download, Edit2, Trash2 } from 'lucide-react';
 import { VideoItem } from '../types';
 
 interface VideoPlayerModalProps {
@@ -7,9 +7,10 @@ interface VideoPlayerModalProps {
   onClose: () => void;
   isAdmin?: boolean;
   onEdit?: () => void;
+  onDelete?: (id: string) => void;
 }
 
-const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClose, isAdmin, onEdit }) => {
+const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClose, isAdmin, onEdit, onDelete }) => {
   if (!video) return null;
 
   // Helper to convert URLs in text to <a> tags
@@ -51,15 +52,29 @@ const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClose, isA
           <div>
             <div className="flex items-center gap-3">
                <h2 className="text-lg font-bold leading-tight">{video.title}</h2>
-               {isAdmin && onEdit && (
-                 <button 
-                   onClick={onEdit}
-                   className="flex items-center gap-1 bg-white/10 hover:bg-white/20 text-xs px-2 py-1 rounded transition-colors text-blue-200"
-                   title="编辑此教程"
-                 >
-                   <Edit2 className="w-3 h-3" />
-                   编辑
-                 </button>
+               {isAdmin && (
+                 <div className="flex items-center gap-2">
+                   {onEdit && (
+                     <button 
+                       onClick={onEdit}
+                       className="flex items-center gap-1 bg-white/10 hover:bg-white/20 text-xs px-2 py-1 rounded transition-colors text-blue-200"
+                       title="编辑此教程"
+                     >
+                       <Edit2 className="w-3 h-3" />
+                       编辑
+                     </button>
+                   )}
+                   {onDelete && (
+                     <button 
+                       onClick={() => onDelete(video.id)}
+                       className="flex items-center gap-1 bg-red-500/10 hover:bg-red-500/30 text-xs px-2 py-1 rounded transition-colors text-red-300 hover:text-red-200 border border-transparent hover:border-red-500/30"
+                       title="删除此教程"
+                     >
+                       <Trash2 className="w-3 h-3" />
+                       删除
+                     </button>
+                   )}
+                 </div>
                )}
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-400 mt-1">
@@ -104,7 +119,7 @@ const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClose, isA
                 </div>
                 <div className="flex items-center gap-2">
                    <Eye className="w-4 h-4" />
-                   {video.views.toLocaleString()} 次观看
+                   {(video.views || 0).toLocaleString()} 次观看
                 </div>
              </div>
              <button 
@@ -117,14 +132,18 @@ const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({ video, onClose, isA
           </div>
 
           <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm relative group">
-             {isAdmin && onEdit && (
-               <button 
-                 onClick={onEdit}
-                 className="absolute top-4 right-4 text-gray-400 hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"
-                 title="编辑说明"
-               >
-                 <Edit2 className="w-4 h-4" />
-               </button>
+             {isAdmin && (
+               <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {onEdit && (
+                    <button 
+                      onClick={onEdit}
+                      className="text-gray-400 hover:text-blue-600"
+                      title="编辑说明"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                  )}
+               </div>
              )}
              <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2 mb-3">
                <FileText className="w-4 h-4 text-slate-400" />

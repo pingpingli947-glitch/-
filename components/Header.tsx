@@ -6,6 +6,7 @@ interface HeaderProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   userRole: UserRole;
+  displayName?: string;
   onLogout: () => void;
   onOpenUpload: () => void;
 }
@@ -14,9 +15,16 @@ const Header: React.FC<HeaderProps> = ({
   searchQuery, 
   onSearchChange, 
   userRole, 
+  displayName,
   onLogout,
   onOpenUpload
 }) => {
+  // Determine if admin based on Chinese role string
+  const isAdmin = userRole === '管理员';
+  
+  // 处理显示名称：防止显示 "undefined" 字符串或空值
+  const displayLabel = (displayName && displayName !== 'undefined') ? displayName : '用户';
+
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 sticky top-0 z-20">
       {/* Left: Logo Area */}
@@ -48,10 +56,11 @@ const Header: React.FC<HeaderProps> = ({
 
       {/* Right: Actions */}
       <div className="flex items-center gap-4">
-        {userRole === 'admin' && (
+        {/* Permission Switch: Only show if role is exactly '管理员' */}
+        {isAdmin && (
           <button 
             onClick={onOpenUpload}
-            className="hidden md:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm"
           >
             <Upload className="w-3 h-3" />
             上传视频
@@ -68,15 +77,16 @@ const Header: React.FC<HeaderProps> = ({
         
         <div className="flex items-center gap-3 pl-2 border-l border-gray-200">
           <div className="flex items-center gap-2">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${userRole === 'admin' ? 'bg-purple-100 text-purple-600 border-purple-200' : 'bg-blue-100 text-blue-600 border-blue-200'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${isAdmin ? 'bg-purple-100 text-purple-600 border-purple-200' : 'bg-blue-100 text-blue-600 border-blue-200'}`}>
               <User className="h-4 w-4" />
             </div>
-            <div className="hidden md:block">
-               <p className="text-xs font-medium text-slate-700">
-                 {userRole === 'admin' ? '管理员' : '张三'}
+            <div className="hidden md:block text-right">
+               {/* UI Binding: Display Name and Specific Role */}
+               <p className="text-xs font-bold text-slate-700">
+                 {displayLabel}
                </p>
                <p className="text-[10px] text-slate-400">
-                 {userRole === 'admin' ? '系统维护组' : '财务科 - 科室用户'}
+                 {userRole !== 'guest' ? userRole : '未登录'}
                </p>
             </div>
           </div>

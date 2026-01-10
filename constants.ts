@@ -6,22 +6,16 @@ export const SCENARIOS: BusinessScenario[] = [
   '项目库',
   '工资发放',
   '集中支付',
-  '会计结算'
+  '会计核算'
 ];
 
-// Using standard sample video for mock data
 const SAMPLE_VIDEO_URL = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
 
-// Business Cover Image Mappings
-// Note: Using direct image links where possible. 
-// If the provided links are viewer pages (postimg.cc/ID), they might need conversion to i.postimg.cc/ID/image.jpg to render in <img> tags.
-// Based on the request, I am using the provided URLs. 
-// *Dev Note*: For these to render correctly as images, they should point to the image file, not the viewer page.
-// I have updated them to the likely direct image format (i.postimg.cc) for better compatibility, 
-// but if they fail, revert to the exact strings provided.
-// Provided: https://postimg.cc/34gqZZGx -> Converted to direct guess: https://i.postimg.cc/34gqZZGx/image.png
-// Provided: https://postimg.cc/McsHpyHv -> Converted to direct guess: https://i.postimg.cc/McsHpyHv/image.png
-// Provided: https://postimg.cc/gwcrpMzW -> Converted to direct guess: https://i.postimg.cc/gwcrpMzW/image.png
+// Updated Real Business Cover Images
+// Using i.postimg.cc direct image format derived from your viewer links
+// Indicator/Payroll: https://postimg.cc/McsHpyHv -> https://i.postimg.cc/McsHpyHv/image.png
+// Payment: https://postimg.cc/gwcrpMzW -> https://i.postimg.cc/gwcrpMzW/image.png
+// Login: https://postimg.cc/34gqZZGx -> https://i.postimg.cc/34gqZZGx/image.png
 
 const IMG_USER_LOGIN = "https://i.postimg.cc/34gqZZGx/image.png"; 
 const IMG_INDICATOR_PAYROLL = "https://i.postimg.cc/McsHpyHv/image.png"; 
@@ -57,7 +51,7 @@ export const MOCK_VIDEOS: VideoItem[] = [
   {
     id: '3',
     title: '为什么我的项目ID显示无效？',
-    thumbnailUrl: 'https://picsum.photos/400/225?random=3', // Keep Random for Project Library
+    thumbnailUrl: 'https://picsum.photos/400/225?random=3', 
     videoUrl: SAMPLE_VIDEO_URL,
     duration: '1:45',
     scenario: '项目库',
@@ -70,7 +64,7 @@ export const MOCK_VIDEOS: VideoItem[] = [
   {
     id: '4',
     title: '每月个人所得税扣除项计算指南',
-    thumbnailUrl: IMG_INDICATOR_PAYROLL, // Payroll (Same as Indicator)
+    thumbnailUrl: IMG_INDICATOR_PAYROLL, // Payroll
     videoUrl: SAMPLE_VIDEO_URL,
     duration: '5:10',
     scenario: '工资发放',
@@ -96,10 +90,10 @@ export const MOCK_VIDEOS: VideoItem[] = [
   {
     id: '6',
     title: '如何正确导出年度资产负债表？',
-    thumbnailUrl: 'https://picsum.photos/400/225?random=6', // Keep Random for Accounting
+    thumbnailUrl: 'https://picsum.photos/400/225?random=6',
     videoUrl: SAMPLE_VIDEO_URL,
     duration: '6:00',
-    scenario: '会计结算',
+    scenario: '会计核算',
     audience: '通用',
     uploadDate: '2023-11-10',
     isFavorite: true,
