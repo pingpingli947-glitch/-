@@ -1,7 +1,7 @@
 import { VideoItem, UserRole } from './types';
 
 // 1. 强制锁定后端地址
-const API_BASE = 'https://7498qp2oa722.vicp.fun/api';
+const API_BASE = 'https://ben-invincible-katerine.ngrok-free.dev/api'';
 
 const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
